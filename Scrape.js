@@ -1,8 +1,9 @@
 li_elements = document.querySelectorAll('[data-testid="product-card"]');
 Array_of_Shops = []
+formula = (price,factor)=>{return (3333/price) + price*0.15*(factor/price)}
 
 for(li of li_elements){
-    price = li.querySelectorAll('[class="dominant-price"]')[0].innerText;
+    price = li.querySelectorAll('[class="dominant-price"]')[0].innerText.replace(".","")
     price = parseFloat(price.split("€")[0].replace(',','.'))
     shipping = li.querySelectorAll('[class="extra-cost cf"]')[0].innerText;
     shipping = parseFloat(shipping.split("€")[0].replace(',','.').replace("Μεταφορικά\n+ ","").replace("+ ",""));
@@ -16,16 +17,16 @@ for(li of li_elements){
 
     switch (availability){
     case "Express":
-        score = price+ price*0.1*0.8; 
-        break;
-    case "Διαθέσιμο από 4 έως 10 ημέρες":
-        score = price+ price*0.4*0.8; 
+        score = formula(price+shipping,4) ;//3333/price + price*(2/price);
         break;
     case "Διαθέσιμο":
-        core = price+ price*0.15*0.8;
+        score = formula(price+shipping,3.5); //3333/price + price*(1.5/price);
+        break;
+    case "Διαθέσιμο από 4 έως 10 ημέρες":
+        score = formula(price+shipping,1); //3333/price + price*(1/price);
         break;
     case "Διαθέσιμο από 10 έως 30 ημέρες":
-        break;
+        continue;
     }
 
     shop = li.querySelectorAll('[class="shop-name"]')[0].innerText;
@@ -38,7 +39,7 @@ for(a of Array_of_Shops){
 
 //Array_of_Shops.sort((x,y)=>{return x.Total_price-y.Total_price})
 Array_of_Shops.sort((x,y)=>{return x.Score-y.Score})
-console.log(Array_of_Shops)
+console.log(Array_of_Shops.reverse())
 
 /*
 303 , 4-10
@@ -46,7 +47,6 @@ console.log(Array_of_Shops)
 309 , 1
 
 307 , 4 - 10
-
 
 
 price * 0.8
