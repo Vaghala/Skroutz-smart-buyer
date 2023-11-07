@@ -1,6 +1,7 @@
+formula = (price,factor)=>{return (3333/price) + price*0.15*(factor/price)}
+
 li_elements = document.querySelectorAll('[data-testid="product-card"]');
 Array_of_Shops = []
-formula = (price,factor)=>{return (3333/price) + price*0.15*(factor/price)}
 
 for(li of li_elements){
     price = li.querySelectorAll('[class="dominant-price"]')[0].innerText.replace(".","")

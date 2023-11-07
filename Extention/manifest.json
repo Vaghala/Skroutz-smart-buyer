@@ -1,0 +1,24 @@
+{
+  "name": "Scrape skroutz",
+  "description": "Scrape Skroutz lists from tabs",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://www.skroutz.gr/s/*"
+  ],
+  "background": {
+    "service_worker":"background.js"
+  },
+  "icons": {
+    "16": "smallicon.png",
+    "32": "bigicon.png"
+  },
+  "action":{
+    "default_title":"Click to open"
+  }
+}
